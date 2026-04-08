@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Receiver</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Received Images</h2>
+
+<div id="gallery"></div>
+
+<script>
+const socket = new WebSocket("ws://10.36.5.197:8081");
+
+const gallery = document.getElementById("gallery");
+
+socket.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+
+  if (data.type === "IMAGE") {
+    const img = document.createElement("img");
+    img.src = data.data;
+    img.width = 200;
+
+    gallery.appendChild(img);
+  }
+};
+</script>
+
+</body>
+</html>

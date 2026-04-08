@@ -1,0 +1,43 @@
+body {
+  text-align: center;
+  font-family: Arial;
+}
+
+video, canvas {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#floating {
+  position: absolute;
+  width: 100px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  /* display: none; */
+}
+
+#receiver {
+  margin-top: 500px;
+}
+
+video {
+  display: none;
+  transform: scaleX(-1);
+}
+
+#slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+#track {
+  display: flex;
+  transition: transform 0.2s ease-out;
+}
+
+#track img {
+  width: 300px;
+  margin: 10px;
+}

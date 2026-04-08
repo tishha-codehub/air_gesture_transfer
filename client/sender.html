@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sender</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Send Image</h2>
+
+<input type="file" id="fileInput">
+<br><br>
+
+<img id="preview" width="200">
+
+<script>
+const socket = new WebSocket("ws://localhost:8081");
+
+const fileInput = document.getElementById("fileInput");
+const preview = document.getElementById("preview");
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    const base64 = reader.result;
+
+    preview.src = base64;
+
+    socket.send(JSON.stringify({
+      type: "IMAGE",
+      data: base64
+    }));
+  };
+
+  reader.readAsDataURL(file);
+});
+</script>
+
+</body>
+</html>
