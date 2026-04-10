@@ -1,6 +1,5 @@
 const video = document.getElementById("video");
 const floating = document.getElementById("floating");
-const receiver = document.getElementById("receiver");
 
 // WebSocket
 const socket = new WebSocket("ws://localhost:8081");
@@ -17,9 +16,6 @@ socket.onmessage = (event) => {
     img.src = data.src;
     img.style.width = "150px";
     img.style.margin = "10px";
-    // img.width = 100;
-    // receiver.innerHTML = "";
-    // receiver.appendChild(img);
   }
 };
 
@@ -58,15 +54,15 @@ hands.onResults((results) => {
   const x = (1 - index.x) * window.innerWidth;
   const y = index.y * window.innerHeight;
 
-  // 👉 Smooth movement
+  // Smooth movement
   smoothX = smoothX * 0.85 + x * 0.15;
   smoothY = smoothY * 0.85 + y * 0.15;
 
-  // 👉 Stable pinch detection (IMPORTANT)
+  // Stable pinch detection (IMPORTANT)
   const isPinching = dist < 0.07;
 
   // =========================
-  // 🎯 PICK (ONLY ONCE)
+  // PICK (ONLY ONCE)
   // =========================
   if (isPinching && !prevPinch && !isHolding) {
     isHolding = true;
@@ -74,7 +70,7 @@ hands.onResults((results) => {
   }
 
   // =========================
-  // 🎯 MOVE
+  // MOVE
   // =========================
   if (isHolding) {
     floating.style.left = `${smoothX}px`;
@@ -82,14 +78,14 @@ hands.onResults((results) => {
   }
 
   // =========================
-  // 🎯 RELEASE (ONLY ONCE)
+  // RELEASE (ONLY ONCE)
   // =========================
   if (!isPinching && prevPinch && isHolding) {
 
     isHolding = false;
     floating.style.display = "none";
 
-    // 🔥 SEND IMAGE
+    //  SEND IMAGE
     const img = new Image();
     img.src = floating.src;
 
@@ -111,76 +107,10 @@ hands.onResults((results) => {
     };
   }
 
-  // 👉 update state
+  // update state
   prevPinch = isPinching;
 });
-// hands.onResults((results) => {
-//   if (!results.multiHandLandmarks.length) return;
 
-//   const landmarks = results.multiHandLandmarks[0];
-
-//   const thumb = landmarks[4];
-//   const index = landmarks[8];
-
-//   const dist = Math.hypot(
-//     thumb.x - index.x,
-//     thumb.y - index.y
-//   );
-
-//   // Convert normalized → screen
-//   const x = (1 - index.x) * window.innerWidth;
-//   const y = index.y * window.innerHeight;
-
-//   // PINCH → PICK
-//   if (dist < 0.05 && !isHolding) {
-//     isHolding = true;
-//     floating.style.display = "block";
-//   }
-
-//   // MOVE
-//   // Apply smoothing
-//   smoothX = smoothX * 0.8 + x * 0.2;
-//   smoothY = smoothY * 0.8 + y * 0.2;
-
-//   // Move image
-//   if (isHolding) {
-//     floating.style.left = `${smoothX}px`;
-//     floating.style.top = `${smoothY}px`;
-//   }
-
-//   // RELEASE → SEND
-//   if (dist < 0.05 && !isHolding) {
-//     // CLOSED PINCH → PICK
-//     isHolding = true;
-//     floating.style.display = "block";
-//   }
-
-//   if (dist > 0.1 && isHolding) {
-//     // FULL OPEN → RELEASE
-//     isHolding = false;
-//     floating.style.display = "none";
-
-//     const img = new Image();
-//     img.src = floating.src;
-
-//     img.onload = () => {
-//       const canvas = document.createElement("canvas");
-//       const ctx = canvas.getContext("2d");
-
-//       canvas.width = img.width;
-//       canvas.height = img.height;
-
-//       ctx.drawImage(img, 0, 0);
-
-//       const base64 = canvas.toDataURL("image/png");
-
-//       socket.send(JSON.stringify({
-//         type: "TRANSFER",
-//         src: base64
-//       }));
-//     };
-//   }
-// });
 const camera = new Camera(video, {
   onFrame: async () => {
     await hands.send({ image: video });
