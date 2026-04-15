@@ -5,14 +5,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <img id="floating" src="my_image.jpg" />
+<div class="container">
+  <h1>Air Gesture Transfer Demo</h1>
+  <p class="subtitle">Control objects using hand gestures</p>
+  
+  <div id="camera-box">
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas"></canvas>
+    
+  </div>
 
-<h2>Air Gesture Transfer Demo</h2>
-
-<video id="video" autoplay playsinline></video>
-<canvas id="canvas"></canvas>
-
-
-<img id="floating" src="my_image.jpg" />
+</div>
 
 
 <script src="https://unpkg.com/@mediapipe/hands/hands.js"></script>

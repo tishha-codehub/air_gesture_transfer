@@ -1,20 +1,77 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background */
 body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #dfe9f3);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main container */
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   text-align: center;
-  font-family: Arial;
+  width: 600px;
+  margin-top: 200px;
+}
+
+/* Title */
+h1 {
+  font-size: 26px;
+  margin-bottom: 5px;
+  color: #333;
+}
+.subtitle {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Camera area */
+.camera-box {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 video, canvas {
   position: absolute;
-  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transform: translateX(-50%);
 }
 
+/* Floating image */
+/* Floating image - TOP HERO STYLE */
 #floating {
   position: absolute;
-  width: 100px;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  /* display: none; */
+  top: 120px;              /* move into top blank space */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;           /* bigger size */
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+/* Optional hover effect */
+#floating:hover {
+  transform: scale(1.1);
 }
 
 #receiver {
