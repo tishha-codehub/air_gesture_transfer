@@ -98,3 +98,75 @@ video {
   width: 300px;
   margin: 10px;
 }
+
+/* Only applies to receiver page */
+.receiver-page {
+  background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+}
+
+/* Container */
+.receiver-page .container {
+  text-align: center;
+  width: 400px;
+  margin: auto;
+  padding-top: 80px;
+}
+
+/* Title */
+.receiver-page h1 {
+  font-size: 26px;
+  color: #222;
+}
+
+.receiver-page .subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Drop Box */
+.receiver-page #box {
+  width: 320px;
+  height: 320px;
+  border-radius: 20px;
+  border: 2px dashed #3b82f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Active glow */
+.receiver-page #box.active {
+  border-color: #2563eb;
+  box-shadow: 0 0 30px rgba(59,130,246,0.5);
+}
+
+/* Placeholder */
+.receiver-page .placeholder {
+  color: #777;
+}
+
+/* Image */
+.receiver-page #box img {
+  width: 120px;
+  margin: 10px;
+  border-radius: 12px;
+  animation: popIn 0.4s ease;
+}
+
+/* Animation */
+@keyframes popIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
