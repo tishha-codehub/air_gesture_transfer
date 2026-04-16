@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Page title shown in browser tab -->
   <title>Air Gesture Transfer</title>
+
+  <!-- External CSS for styling UI -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Floating image that will be controlled by hand gestures -->
+  <!-- This acts as the draggable object -->
   <img id="floating" src="my_image.jpg" />
-<div class="container">
-  <h1>Air Gesture Transfer Demo</h1>
-  <p class="subtitle">Control objects using hand gestures</p>
-  
-  <div id="camera-box">
-    <video id="video" autoplay playsinline></video>
-    <canvas id="canvas"></canvas>
+
+  <!-- Main container for UI content -->
+  <div class="container">
+
+    <!-- Title of the application -->
+    <h1>Air Gesture Transfer Demo</h1>
+
+    <!-- Short description / subtitle -->
+    <p class="subtitle">Control objects using hand gestures</p>
     
+    <!-- Camera box: contains video feed + canvas overlay -->
+    <!-- This is the interaction area where hand tracking happens -->
+    <div id="camera-box">
+
+      <!-- Webcam video stream (hidden or styled via CSS) -->
+      <video id="video" autoplay playsinline></video>
+
+      <!-- Canvas used by MediaPipe to draw hand landmarks -->
+      <canvas id="canvas"></canvas>
+      
+    </div>
+
   </div>
 
-</div>
+  <!-- MediaPipe Hands library (hand tracking engine) -->
+  <script src="https://unpkg.com/@mediapipe/hands/hands.js"></script>
 
+  <!-- MediaPipe Camera utility (handles webcam input) -->
+  <script src="https://unpkg.com/@mediapipe/camera_utils/camera_utils.js"></script>
 
-<script src="https://unpkg.com/@mediapipe/hands/hands.js"></script>
-<script src="https://unpkg.com/@mediapipe/camera_utils/camera_utils.js"></script>
-<script src="app.js"></script>
+  <!-- Your main gesture logic (grab, move, release, transfer) -->
+  <script src="app.js"></script>
 
 </body>
 </html>
